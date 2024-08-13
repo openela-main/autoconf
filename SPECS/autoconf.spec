@@ -6,7 +6,7 @@
 Summary:    A GNU tool for automatically configuring source code
 Name:       autoconf
 Version:    2.69
-Release:    29%{?dist}
+Release:    29%{?dist}.1
 License:    GPLv2+ and GFDL
 Source0:    http://ftpmirror.gnu.org/autoconf/autoconf-%{version}.tar.xz
 Source1:    config.site
@@ -14,6 +14,8 @@ Source2:    autoconf-init.el
 URL:        http://www.gnu.org/software/autoconf/
 
 Patch1:     autoconf-2.69-perl-5.22-autoscan.patch
+# Backport: see RHEL-40719
+Patch2:     0001-Port-AC_F77_LIBRARY_LDFLAGS-to-oneAPI-HPC-Toolkit.patch
 
 BuildArch:  noarch
 
@@ -135,6 +137,9 @@ fi
 
 
 %changelog
+* Wed Jun 12 2024 Frederic Berat <fberat@redhat.com> - 2.69-29.1
+- Fix issues with Fortran detection and oneAPI HPC Toolkit (RHEL-40719)
+
 * Mon Jun 28 2021 Honza Horak <hhorak@redhat.com> - 2.69-29
 - Bump release number to avoid installing reverted RPM in CStream
   Resolves: #1956598
