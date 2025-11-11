@@ -6,7 +6,7 @@
 Summary:    A GNU tool for automatically configuring source code
 Name:       autoconf
 Version:    2.69
-Release:    39%{?dist}
+Release:    41%{?dist}
 License:    GPLv2+ and GFDL
 Source0:    https://ftp.gnu.org/gnu/autoconf/autoconf-%{version}.tar.xz
 Source1:    config.site
@@ -19,6 +19,9 @@ Patch3:     autoconf-2.69-backport-runstatedir-option.patch
 
 # Backport: see RHEL-40739
 Patch4:     0001-Port-AC_F77_LIBRARY_LDFLAGS-to-oneAPI-HPC-Toolkit.patch
+
+# Backport: see RHEL-47138
+Patch5:     0001-Fix-test-suite-with-modern-Perl.patch
 
 BuildArch:  noarch
 
@@ -129,6 +132,12 @@ install -p -m 0644 %{SOURCE2} %{buildroot}%{_emacs_sitestartdir}
 
 
 %changelog
+* Wed Apr 02 2025 Frédéric Bérat <fberat@redhat.com> - 2.69-41
+- rebuilt
+
+* Wed Nov 27 2024 Frederic Berat <fberat@redhat.com> - 2.69-40
+- Fix test suite under Perl 5.26 (RHEL-47138)
+
 * Tue Jun 11 2024 Frederic Berat <fberat@redhat.com> - 2.69-39
 - Fix issues with Fortran detection and oneAPI HPC Toolkit (RHEL-40739)
 
