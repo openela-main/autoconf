@@ -10,7 +10,7 @@
 # `/opt/{namespace}/{versioned name}`.
 Name:       autoconf
 Version:    2.71
-Release:    12%{?dist}
+Release:    13%{?dist}
 
 # To help future rebase, the following licenses were seen in the following files/folders:
 # '*' is anything that was not explicitly listed earlier in the folder
@@ -78,6 +78,8 @@ Summary:    Meta package to include latest version of autoconf
 %bcond_without autoconf_enables_emacs
 %global autoconf %{name}
 Summary:    A GNU tool for automatically configuring source code
+Provides:   autoconf-latest = %{version}-%{release}
+Provides:   %(echo autoconf%{version} | tr -d .) = %{version}-%{release}
 %endif
 
 BuildArch:  noarch
@@ -215,6 +217,9 @@ install -p -m 755 enable.scl ${RPM_BUILD_ROOT}/%{_prefix}/enable
 
 
 %changelog
+* Fri Mar 14 2025 Frederic Berat <fberat@redhat.com> - 2.71-13
+- Ensure that we can transition from autoconf-latest to autoconf (RHEL-33538)
+
 * Tue Oct 29 2024 Troy Dawson <tdawson@redhat.com> - 2.71-12
 - Bump release for October 2024 mass rebuild:
   Resolves: RHEL-64018
